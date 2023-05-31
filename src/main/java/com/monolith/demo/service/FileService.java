@@ -4,8 +4,6 @@ import com.monolith.demo.domain.FileEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-
-import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -16,12 +14,12 @@ public class FileService {
   String url = "http://localhost:8081/file";
 
   public List<FileEntity> getFile() {
-    return null;
+    return getFileFromSecondService();
   }
 
   private List<FileEntity> getFileFromSecondService() {
     ResponseEntity<FileEntity[]> response = restTemplate.getForEntity(url, FileEntity[].class);
-    return (List<FileEntity>) response;
+    return List.of(response.getBody());
   }
 
 }
